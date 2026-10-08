@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--MB-START-->
+<title>OCC MONS Moodboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: forge vertical — un emblème-héros, puis des "chambres" séparées par des coutures fines, labels mono en marge */
+:root {
+  --void: #08070B;
+  --crypt: #110E15;
+  --stone: #1C1821;
+  --seam: #2E2733;
+  --bone: #EFE8E1;
+  --ash: #9D94A3;
+  --ember: #F6A04D;
+  --blaze: #FF6A3D;
+  --wyrm: #FF2E8B;
+  --forge: linear-gradient(120deg, var(--ember) 0%, var(--blaze) 45%, var(--wyrm) 100%);
+
+  --f-display: "Cinzel", "Trajan Pro", "Times New Roman", serif;
+  --f-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --gutter: clamp(16px, 4vw, 48px);
+  --maxw: 1320px;
+  --r: 2px;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--void); }
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--bone);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+
+.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* grain overlay */
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- top bar ---------- */
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40;
+  background: color-mix(in srgb, var(--void) 82%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--seam);
+}
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.mono { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ash); }
+.bar nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.bar nav a { text-decoration: none; }
+.bar nav a:hover { color: var(--bone); }
+@media (max-width: 720px) { .bar nav { display: none; } }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--seam); }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero .wrap {
+  position: relative; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center;
+  gap: clamp(24px, 5vw, 72px); padding-block: clamp(56px, 9vw, 120px);
+}
+.hero-copy { min-width: 0; }
+.eyebrow { display: flex; gap: 14px; align-items: center; margin-bottom: 28px; }
+.eyebrow::before { content: ""; width: 40px; height: 1px; background: var(--forge); }
+.hero h1 {
+  font-family: var(--f-display); font-weight: 900; line-height: .92; letter-spacing: .02em;
+  font-size: clamp(2.9rem, 8.4vw, 7.6rem); margin: 0; text-wrap: balance;
+}
+.hero h1 .line { display: block; overflow: hidden; padding-bottom: .04em; }
+.hero h1 .ch { display: inline-block; will-change: transform; }
+.hero h1 .studios {
+  font-weight: 500; font-size: .34em; letter-spacing: .62em; color: var(--ash); margin-top: .5em;
+}
+.grad-text { background: var(--forge); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p.lede { max-width: 46ch; color: var(--ash); font-size: 1.125rem; margin: 32px 0 36px; }
+.hero p.lede strong { color: var(--bone); font-weight: 600; }
+.cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+.emblem { position: relative; aspect-ratio: 1; max-width: 520px; width: 100%; justify-self: center; }
+.emblem img { width: 100%; position: relative; }
+.emblem::before {
+  content: ""; position: absolute; inset: 18%; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--wyrm) 30%, transparent), transparent 70%);
+  filter: blur(40px); animation: breathe 5s ease-in-out infinite;
+}
+@keyframes breathe { 50% { opacity: .55; transform: scale(1.08); } }
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .emblem { max-width: 300px; order: -1; }
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  --mx: 0px; --my: 0px;
+  position: relative; display: inline-flex; align-items: center; gap: 12px;
+  padding: 16px 28px; border-radius: var(--r); border: 1px solid transparent;
+  font-family: var(--f-body); font-weight: 600; font-size: .95rem; letter-spacing: .04em;
+  text-decoration: none; cursor: pointer; isolation: isolate; overflow: hidden;
+  transition: color .3s, border-color .3s;
+}
+.btn .arrow { transition: transform .4s cubic-bezier(.16,1,.3,1); }
+.btn:hover .arrow { transform: translateX(5px); }
+.btn-forge { background: var(--forge); background-size: 200% 100%; color: var(--void); }
+.btn-forge::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
+  transform: translateX(-120%); transition: transform .8s cubic-bezier(.16,1,.3,1);
+}
+.btn-forge:hover::after { transform: translateX(120%); }
+.btn-forge:hover { box-shadow: 0 10px 40px -8px color-mix(in srgb, var(--wyrm) 60%, transparent); }
+.btn-ghost { color: var(--bone); border-color: var(--seam); background: transparent; }
+.btn-ghost::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--bone);
+  transform: scaleY(0); transform-origin: bottom; transition: transform .5s cubic-bezier(.16,1,.3,1);
+}
+.btn-ghost:hover { color: var(--void); border-color: var(--bone); }
+.btn-ghost:hover::before { transform: scaleY(1); }
+.link-rune {
+  font-family: var(--f-mono); font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+  text-decoration: none; color: var(--bone); padding-bottom: 6px;
+  background: linear-gradient(var(--seam), var(--seam)) 0 100% / 100% 1px no-repeat,
+              var(--forge) 0 100% / 0% 1px no-repeat;
+  transition: background-size .6s cubic-bezier(.16,1,.3,1);
+}
+.link-rune:hover { background-size: 100% 1px, 100% 1px; }
+
+/* ---------- chambers (sections) ---------- */
+.chamber { border-bottom: 1px solid var(--seam); padding-block: clamp(64px, 9vw, 120px); }
+.chamber:nth-of-type(even) { background: var(--crypt); }
+.chamber-head {
+  display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: baseline; margin-bottom: 48px;
+}
+.chamber-head h2 {
+  font-family: var(--f-display); font-weight: 700; font-size: clamp(1.9rem, 4vw, 3.2rem);
+  line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: .01em;
+}
+.chamber-head p { color: var(--ash); max-width: 62ch; margin: 14px 0 0; }
+@media (max-width: 720px) { .chamber-head { grid-template-columns: 1fr; gap: 10px; } }
+
+/* palette */
+.swatches { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 1px; background: var(--seam); border: 1px solid var(--seam); }
+.swatch {
+  background: var(--void); padding: 0; border: 0; text-align: left; cursor: pointer; color: var(--bone);
+  font: inherit; display: flex; flex-direction: column;
+}
+.swatch .chip { height: 110px; transition: height .5s cubic-bezier(.16,1,.3,1); }
+.swatch:hover .chip { height: 130px; }
+@media (max-width: 1100px) { .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.swatch .meta { padding: 14px 16px 16px; display: grid; gap: 2px; }
+.swatch .name { font-weight: 600; }
+.swatch .hex { overflow-wrap: anywhere; font-family: var(--f-mono); font-size: .75rem; color: var(--ash); font-variant-numeric: tabular-nums; }
+.swatch .use { font-size: .8rem; color: var(--ash); }
+.forge-bar {
+  margin-top: 24px; height: 72px; background: var(--forge); border-radius: var(--r);
+  display: flex; align-items: center; justify-content: space-between; padding-inline: 20px; color: var(--void);
+}
+.forge-bar .mono { color: var(--void); }
+.toast {
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px);
+  background: var(--bone); color: var(--void); padding: 10px 18px; border-radius: var(--r);
+  font-family: var(--f-mono); font-size: .78rem; opacity: 0; pointer-events: none; transition: .3s; z-index: 60;
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* type */
+.type-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--seam); border: 1px solid var(--seam); }
+.type-card { background: var(--void); padding: 28px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.chamber:nth-of-type(even) .type-card, .chamber:nth-of-type(even) .swatch { background: var(--crypt); }
+.type-card .big { font-size: 4.4rem; line-height: 1; }
+.type-card .role { display: flex; justify-content: space-between; gap: 8px; }
+.type-card p { margin: 0; color: var(--ash); }
+@media (max-width: 860px) { .type-grid { grid-template-columns: 1fr; } }
+.scale { margin-top: 40px; display: grid; gap: 18px; }
+.scale-row { display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: baseline; border-top: 1px solid var(--seam); padding-top: 18px; min-width: 0; }
+.scale-row > :last-child { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 600px) { .scale-row { grid-template-columns: 1fr; gap: 6px; } }
+
+/* buttons board */
+.btn-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--seam); border: 1px solid var(--seam); }
+.btn-cell { background: var(--crypt); padding: 40px 28px; display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
+.btn-cell.wide { grid-column: span 2; }
+.btn-cell p { margin: 0; color: var(--ash); font-size: .9rem; }
+@media (max-width: 860px) { .btn-board { grid-template-columns: 1fr; } .btn-cell.wide { grid-column: auto; } }
+.status { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--seam); font-family: var(--f-mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; }
+.status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+.status.live { color: var(--ember); }
+.status.beta { color: var(--wyrm); }
+.status.dev { color: var(--ash); }
+.chips { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* project cards */
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; perspective: 1200px; }
+@media (max-width: 860px) { .projects { grid-template-columns: 1fr; } }
+.card {
+  --px: 50%; --py: 50%;
+  position: relative; display: flex; flex-direction: column; text-decoration: none; color: var(--bone);
+  background: var(--stone); border: 1px solid var(--seam); border-radius: var(--r);
+  transform-style: preserve-3d; overflow: hidden; min-width: 0;
+}
+.card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s;
+  background: radial-gradient(420px circle at var(--px) var(--py), color-mix(in srgb, var(--ember) 18%, transparent), transparent 60%);
+}
+.card:hover::after { opacity: 1; }
+.card:hover { border-color: color-mix(in srgb, var(--ember) 45%, var(--seam)); }
+.cover { position: relative; aspect-ratio: 16 / 10; overflow: hidden; max-width: 100%; background: var(--crypt); }
+.cover canvas { width: 100%; height: 100%; display: block; transition: transform 1.2s cubic-bezier(.16,1,.3,1); }
+.card:hover .cover canvas { transform: scale(1.06); }
+.cover .tag { position: absolute; top: 16px; left: 16px; }
+.cover .domain { position: absolute; left: 20px; bottom: 16px; color: var(--bone); }
+.card-body { padding: 26px 26px 28px; display: grid; gap: 12px; }
+.card-body h3 { font-family: var(--f-display); font-weight: 700; font-size: 1.9rem; margin: 0; letter-spacing: .02em; }
+.card-body p { margin: 0; color: var(--ash); }
+.card-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--seam); flex-wrap: wrap; }
+.note { margin-top: 20px; color: var(--ash); font-size: .88rem; }
+
+/* scroll demo */
+.manifesto { font-family: var(--f-display); font-weight: 700; font-size: clamp(1.7rem, 4.2vw, 3.4rem); line-height: 1.18; margin: 0; max-width: 22ch; text-wrap: balance; }
+.manifesto .w { color: color-mix(in srgb, var(--bone) 30%, transparent); transition: color .2s; }
+.manifesto .w.lit { color: var(--bone); }
+.manifesto .w.hot.lit { background: var(--forge); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.scroll-stage { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+.dragon-path { width: clamp(120px, 18vw, 220px); height: auto; }
+@media (max-width: 720px) { .scroll-stage { grid-template-columns: 1fr; } .dragon-path { display: none; } }
+
+/* logos */
+.logos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--seam); border: 1px solid var(--seam); }
+.logo-cell { background: var(--void); padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.logo-cell img { aspect-ratio: 1; object-fit: contain; transition: transform .8s cubic-bezier(.16,1,.3,1); }
+.logo-cell:hover img { transform: scale(1.04); }
+.logo-cell h3 { margin: 0; font-size: 1rem; font-weight: 600; }
+.logo-cell p { margin: 0; color: var(--ash); font-size: .88rem; }
+@media (max-width: 860px) { .logos { grid-template-columns: 1fr; } }
+
+/* tokens */
+.tokens { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; }
+.tokens h3 { margin: 0 0 16px; }
+.space-row { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.space-row .bar-s { height: 8px; background: var(--forge); border-radius: 1px; }
+.space-row .mono { width: 64px; font-variant-numeric: tabular-nums; }
+.tok-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.tok-list li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--seam); padding-bottom: 10px; }
+.tok-list li span:last-child { color: var(--ash); text-align: right; }
+
+/* validation */
+.checklist { display: grid; gap: 1px; background: var(--seam); border: 1px solid var(--seam); counter-reset: q; }
+.checklist li { list-style: none; background: var(--crypt); padding: 20px 24px; display: grid; grid-template-columns: 48px 1fr; gap: 12px; counter-increment: q; }
+.checklist li::before { content: counter(q, decimal-leading-zero); font-family: var(--f-mono); color: var(--ember); font-size: .8rem; padding-top: 3px; }
+.checklist ul { padding: 0; margin: 0; }
+.checklist b { display: block; }
+.checklist span { color: var(--ash); }
+
+footer.mb { padding-block: 40px; }
+footer.mb .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+<!--MB-END-->
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <span class="mono">OCC MONS Studios — Planche v0.1</span>
+    <nav class="mono" aria-label="Sections de la planche">
+      <a href="#palette">Couleurs</a><a href="#type">Typo</a><a href="#ui">Boutons</a><a href="#cards">Projets</a><a href="#motion">Motion</a><a href="#logo">Logo</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" aria-label="Aperçu du hero">
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow mono">50.4542° N · 3.9523° E — Mons</div>
+      <h1 id="hero-title">
+        <span class="line" data-split>OCC</span>
+        <span class="line" data-split><span class="grad-text">MONS</span></span>
+        <span class="line studios" data-split>Studios</span>
+      </h1>
+      <p class="lede">Nous forgeons des <strong>mondes jouables</strong> et des <strong>expériences web</strong> taillées pour durer. Un studio, deux métiers, la même exigence.</p>
+      <div class="cta-row">
+        <a class="btn btn-forge magnetic" href="#cards">Voir nos projets <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost magnetic" href="#motion">Le studio</a>
+      </div>
+    </div>
+    <div class="emblem" id="emblem"><img src="assets/emblem-coil.webp" alt="Emblème OCC MONS : une tour enlacée par un dragon" width="720" height="720"></div>
+  </div>
+</section>
+
+<section class="chamber" id="palette">
+  <div class="wrap">
+    <div class="chamber-head">
+      <span class="mono">01 — Couleurs</span>
+      <div>
+        <h2>Le noir de la crypte, le feu du dragon</h2>
+        <p>Des neutres légèrement violacés pour que le noir paraisse profond plutôt que vide. Le dégradé du logo sert d'accent unique, réservé aux appels à l'action et aux mots-clés. Cliquez une teinte pour copier son code.</p>
+      </div>
+    </div>
+    <div class="swatches" id="swatches"></div>
+    <div class="forge-bar"><span class="mono">--forge · dégradé signature</span><span class="mono">#F6A04D → #FF6A3D → #FF2E8B</span></div>
+  </div>
+</section>
+
+<section class="chamber" id="type">
+  <div class="wrap">
+    <div class="chamber-head">
+      <span class="mono">02 — Typographie</span>
+      <div>
+        <h2>Gravé dans la pierre, lisible à l'écran</h2>
+        <p>Une capitale lapidaire pour les titres, qui évoque les inscriptions et les sagas. Une grotesque nette pour le texte. Une mono pour les métadonnées, statuts et coordonnées, à la manière d'une interface de jeu.</p>
+      </div>
+    </div>
+    <div class="type-grid">
+      <div class="type-card">
+        <div class="role mono"><span>Display</span><span>600–900</span></div>
+        <div class="big" style="font-family:var(--f-display);font-weight:900">Aa</div>
+        <div style="font-family:var(--f-display);font-size:1.6rem;font-weight:700">Cinzel</div>
+        <p>Titres héroïques, noms de projets. Toujours en capitales, jamais en paragraphe.</p>
+      </div>
+      <div class="type-card">
+        <div class="role mono"><span>Texte</span><span>400–700</span></div>
+        <div class="big" style="font-weight:600">Aa</div>
+        <div style="font-size:1.6rem;font-weight:600">Hanken Grotesk</div>
+        <p>Corps de texte, navigation, boutons. Chaleureuse, compacte, très lisible en petit.</p>
+      </div>
+      <div class="type-card">
+        <div class="role mono"><span>Utilitaire</span><span>400–500</span></div>
+        <div class="big" style="font-family:var(--f-mono)">Aa</div>
+        <div style="font-family:var(--f-mono);font-size:1.4rem">JetBrains Mono</div>
+        <p>Labels, statuts, stack technique, dates. Capitales espacées à 0.18em.</p>
+      </div>
+    </div>
+    <div class="scale">
+      <div class="scale-row"><span class="mono">Hero · clamp 3–8.5rem</span><span style="font-family:var(--f-display);font-weight:900;font-size:clamp(2.2rem,6vw,4.6rem);line-height:1">Empire</span></div>
+      <div class="scale-row"><span class="mono">H2 · 3.2rem</span><span style="font-family:var(--f-display);font-weight:700;font-size:clamp(1.6rem,4vw,3.2rem);line-height:1.1">Forgé à l'ombre du beffroi</span></div>
+      <div class="scale-row"><span class="mono">H3 · 1.6rem</span><span style="font-weight:600;font-size:1.6rem;line-height:1.25">Du prototype au jeu en ligne</span></div>
+      <div class="scale-row"><span class="mono">Body · 1rem</span><span style="color:var(--ash);max-width:62ch">Nous concevons des jeux de stratégie jouables dans le navigateur et des sites rapides, accessibles et animés avec soin. Chaque projet passe par le même atelier.</span></div>
+      <div class="scale-row"><span class="mono">Label · 0.72rem</span><span class="mono" style="color:var(--bone)">Stratégie · Navigateur · 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="chamber" id="ui">
+  <div class="wrap">
+    <div class="chamber-head">
+      <span class="mono">03 — Boutons &amp; survols</span>
+      <div>
+        <h2>Des contrôles qui réagissent au geste</h2>
+        <p>Survolez chaque élément. Les boutons principaux suivent légèrement le curseur (effet magnétique GSAP). Les angles restent vifs, rayon de 2 px, pour un rendu gravé.</p>
+      </div>
+    </div>
+    <div class="btn-board">
+      <div class="btn-cell">
+        <span class="mono">Primaire · forge</span>
+        <a class="btn btn-forge magnetic" href="#ui">Jouer maintenant <span class="arrow" aria-hidden="true">→</span></a>
+        <p>Un seul par écran. Reflet balayé + halo magenta au survol.</p>
+      </div>
+      <div class="btn-cell">
+        <span class="mono">Secondaire · ghost</span>
+        <a class="btn btn-ghost magnetic" href="#ui">Découvrir le studio</a>
+        <p>Remplissage os qui monte depuis le bas au survol.</p>
+      </div>
+      <div class="btn-cell">
+        <span class="mono">Lien · rune</span>
+        <a class="link-rune" href="#ui">empire.fs0ciety.org ↗</a>
+        <p>Liens tertiaires et liens externes. Soulignement qui se remplit de feu.</p>
+      </div>
+      <div class="btn-cell">
+        <span class="mono">Statuts</span>
+        <div class="chips"><span class="status live">En ligne</span><span class="status beta">Bêta</span><span class="status dev">En forge</span></div>
+        <p>Pastilles des cartes projets.</p>
+      </div>
+      <div class="btn-cell wide">
+        <span class="mono">Stack · métadonnées</span>
+        <div class="chips mono" style="color:var(--bone)"><span>SvelteKit</span><span>·</span><span>Phaser</span><span>·</span><span>Node</span><span>·</span><span>PostgreSQL</span></div>
+        <p>Les technologies sont écrites en mono, séparées par des points médians, sans badges colorés.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chamber" id="cards">
+  <div class="wrap">
+    <div class="chamber-head">
+      <span class="mono">04 — Cartes projets</span>
+      <div>
+        <h2>Les mondes que nous avons forgés</h2>
+        <p>Inclinaison 3D légère et halo qui suit le curseur. Les visuels ci-dessous sont des placeholders générés : ils seront remplacés par des captures ou des illustrations Midjourney à l'étape 4.</p>
+      </div>
+    </div>
+    <div class="projects">
+      <a class="card tilt" href="https://empire.fs0ciety.org" target="_blank" rel="noopener">
+        <div class="cover"><canvas data-cover="empire" aria-hidden="true"></canvas><span class="status live tag">En ligne</span><span class="domain mono">empire.fs0ciety.org</span></div>
+        <div class="card-body">
+          <span class="mono">Jeu · Stratégie</span>
+          <h3>Empire</h3>
+          <p>Bâtissez, conquérez, tenez vos terres. Description provisoire, à remplacer par votre texte.</p>
+          <div class="card-foot"><span class="mono">2026</span><span class="link-rune">Entrer dans l'Empire ↗</span></div>
+        </div>
+      </a>
+      <a class="card tilt" href="https://test-csm.fs0ciety.org" target="_blank" rel="noopener">
+        <div class="cover"><canvas data-cover="csm" aria-hidden="true"></canvas><span class="status beta tag">Bêta</span><span class="domain mono">test-csm.fs0ciety.org</span></div>
+        <div class="card-body">
+          <span class="mono">Web · Plateforme</span>
+          <h3>CSM</h3>
+          <p>Projet en phase de test. Description provisoire, à remplacer par votre texte.</p>
+          <div class="card-foot"><span class="mono">2026</span><span class="link-rune">Voir le projet ↗</span></div>
+        </div>
+      </a>
+    </div>
+    <p class="note">Sur le site final, ces cartes sont générées depuis <code class="mono" style="letter-spacing:0">projects.ts</code> : ajouter un projet revient à ajouter une entrée.</p>
+  </div>
+</section>
+
+<section class="chamber" id="motion">
+  <div class="wrap">
+    <div class="chamber-head">
+      <span class="mono">05 — Motion · ScrollTrigger</span>
+      <div>
+        <h2>Le défilement raconte</h2>
+        <p>Faites défiler : le manifeste s'embrase mot à mot et le tracé du dragon se dessine, tous deux pilotés par la position du scroll (scrub). C'est le type de mise en scène prévu pour la section Studio.</p>
+      </div>
+    </div>
+    <div class="scroll-stage">
+      <p class="manifesto" id="manifesto">Nous croyons qu'un site se <em class="hot">joue</em> et qu'un jeu se <em class="hot">visite</em>. Entre le code et le récit, nous forgeons des mondes qui tiennent debout.</p>
+      <svg class="dragon-path" viewBox="0 0 200 320" fill="none" aria-hidden="true">
+        <defs><linearGradient id="fg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6A04D"/><stop offset=".5" stop-color="#FF6A3D"/><stop offset="1" stop-color="#FF2E8B"/></linearGradient></defs>
+        <path id="coil" d="M100 10 L100 40 M80 40 H120 V200 H80 Z M100 200 C 30 200, 10 250, 60 280 C 110 310, 180 290, 170 240 C 160 200, 120 210, 125 240" stroke="url(#fg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="chamber" id="logo">
+  <div class="wrap">
+    <div class="chamber-head">
+      <span class="mono">06 — Emblème</span>
+      <div>
+        <h2>Quel blason pour le studio ?</h2>
+        <p>Les trois logos fournis, posés sur le fond du site. Proposition : la tour enlacée comme emblème principal (hero, Open Graph), le dragon perché comme marque compacte (header, favicon).</p>
+      </div>
+    </div>
+    <div class="logos">
+      <div class="logo-cell"><img src="assets/emblem-coil.webp" alt="Tour enlacée par un dragon, trait fin" width="720" height="720" loading="lazy"><h3>A · Tour enlacée</h3><p>Le plus élégant. Recommandé pour l'emblème principal.</p></div>
+      <div class="logo-cell"><img src="assets/emblem-crest.webp" alt="Dragon perché sur une tour crénelée" width="720" height="720" loading="lazy"><h3>B · Dragon perché</h3><p>Silhouette compacte et lisible en petit. Recommandé pour le favicon.</p></div>
+      <div class="logo-cell"><img src="assets/wordmark.webp" alt="Dragon et tour en aplats avec le texte OCC MONS" width="720" height="720" loading="lazy"><h3>C · Blason + nom</h3><p>Plus chargé. Idéal en affiche ou en écran de chargement.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="chamber" id="tokens">
+  <div class="wrap">
+    <div class="chamber-head">
+      <span class="mono">07 — Tokens</span>
+      <div><h2>Espacements et mouvement</h2></div>
+    </div>
+    <div class="tokens">
+      <div>
+        <h3 class="mono" style="color:var(--bone)">Espacements · base 4 px</h3>
+        <div id="spaces"></div>
+      </div>
+      <div>
+        <h3 class="mono" style="color:var(--bone)">Motion</h3>
+        <ul class="tok-list">
+          <li><span>Entrée</span><span class="mono">expo.out · 0.9s</span></li>
+          <li><span>Transition</span><span class="mono">power3.inOut · 0.6s</span></li>
+          <li><span>Intro hero</span><span class="mono">1.4s · stagger 0.03s/lettre</span></li>
+          <li><span>Blocs</span><span class="mono">stagger 0.08s</span></li>
+          <li><span>Scroll</span><span class="mono">Lenis + ScrollTrigger scrub</span></li>
+          <li><span>Accessibilité</span><span class="mono">reduced-motion → statique</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="mono" style="color:var(--bone)">Formes</h3>
+        <ul class="tok-list">
+          <li><span>Rayon</span><span class="mono">2px</span></li>
+          <li><span>Pastille</span><span class="mono">999px</span></li>
+          <li><span>Bordure</span><span class="mono">1px · --seam</span></li>
+          <li><span>Conteneur</span><span class="mono">1320px</span></li>
+          <li><span>Gouttière</span><span class="mono">16 → 48px</span></li>
+          <li><span>Grain</span><span class="mono">bruit SVG · 6 %</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chamber" id="validate">
+  <div class="wrap">
+    <div class="chamber-head">
+      <span class="mono">08 — À valider</span>
+      <div><h2>Votre retour avant l'étape 3</h2></div>
+    </div>
+    <ul class="checklist">
+      <li><div><b>Palette</b><span>Les neutres violacés et le dégradé ambre → magenta vous conviennent-ils ?</span></div></li>
+      <li><div><b>Typographie</b><span>Cinzel en titres, ou préférez-vous une capitale plus moderne et moins médiévale ?</span></div></li>
+      <li><div><b>Boutons &amp; motion</b><span>Niveau d'animation juste, trop discret ou trop présent ?</span></div></li>
+      <li><div><b>Emblème</b><span>A en principal et B en compact, ou un autre choix ?</span></div></li>
+      <li><div><b>Récit Mons</b><span>Le fil beffroi / dragon (Doudou) peut-il servir de trame narrative au site ?</span></div></li>
+      <li><div><b>Contenus</b><span>Descriptions, stack et visuels d'Empire et de CSM, et coordonnées pour le footer.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<footer class="mb">
+  <div class="wrap"><span class="mono">OCC MONS Studios · studios.fs0ciety.org</span><span class="mono">Planche de tendance · v0.1</span></div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = matchMedia("(pointer: fine)").matches;
+  const css = getComputedStyle(document.documentElement);
+  const tok = n => css.getPropertyValue(n).trim();
+
+  /* ---------- swatches ---------- */
+  const colors = [
+    ["Void", "--void", "Fond principal"], ["Crypt", "--crypt", "Sections alternées"],
+    ["Stone", "--stone", "Cartes, champs"], ["Seam", "--seam", "Bordures"],
+    ["Bone", "--bone", "Texte principal"], ["Ash", "--ash", "Texte secondaire"],
+    ["Ember", "--ember", "Accent ambre"], ["Blaze", "--blaze", "Accent feu"], ["Wyrm", "--wyrm", "Accent magenta"]
+  ];
+  const sw = document.getElementById("swatches");
+  const toast = document.getElementById("toast");
+  let tt;
+  const say = msg => { toast.textContent = msg; toast.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("on"), 1600); };
+  colors.forEach(([name, v, use]) => {
+    const hex = tok(v).toUpperCase();
+    const b = document.createElement("button");
+    b.className = "swatch"; b.type = "button";
+    b.innerHTML = `<span class="chip" style="background:var(${v})"></span><span class="meta"><span class="name">${name}</span><span class="hex">${v} · ${hex}</span><span class="use">${use}</span></span>`;
+    b.addEventListener("click", () => {
+      navigator.clipboard.writeText(hex).then(() => say(`${hex} copié`), () => say(`${hex} (copie bloquée, sélectionnez le code)`));
+    });
+    sw.appendChild(b);
+  });
+
+  /* ---------- spacing tokens ---------- */
+  const sp = document.getElementById("spaces");
+  [4, 8, 12, 16, 24, 32, 48, 64, 96, 128].forEach(n => {
+    sp.insertAdjacentHTML("beforeend", `<div class="space-row"><span class="mono">${n}px</span><span class="bar-s" style="width:${Math.min(n * 1.6, 200)}px"></span></div>`);
+  });
+
+  /* ---------- ember particles ---------- */
+  const cv = document.getElementById("embers");
+  const ctx = cv.getContext("2d");
+  let W = 0, H = 0, parts = [];
+  const palette = [tok("--ember"), tok("--blaze"), tok("--wyrm")];
+  const resize = () => {
+    const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
+    W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    parts = Array.from({ length: Math.round(W / 14) }, () => spawn(true));
+  };
+  const spawn = init => ({
+    x: Math.random() * W, y: init ? Math.random() * H : H + 10,
+    r: Math.random() * 1.6 + .4, vy: Math.random() * .5 + .15, vx: (Math.random() - .5) * .2,
+    a: Math.random() * .6 + .2, c: palette[(Math.random() * 3) | 0], ph: Math.random() * 6.28
+  });
+  const draw = t => {
+    ctx.clearRect(0, 0, W, H);
+    for (const p of parts) {
+      p.y -= p.vy; p.x += p.vx + Math.sin(t / 1400 + p.ph) * .15;
+      if (p.y < -10) Object.assign(p, spawn(false));
+      ctx.globalAlpha = p.a * Math.min(1, p.y / (H * .5));
+      ctx.fillStyle = p.c; ctx.shadowColor = p.c; ctx.shadowBlur = 8;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+    }
+  };
+  resize(); addEventListener("resize", resize);
+  if (reduce) draw(0); else gsap.ticker.add(() => draw(performance.now()));
+
+  /* ---------- project cover placeholders ---------- */
+  document.querySelectorAll("canvas[data-cover]").forEach(c => {
+    const d = 2, w = 640, h = 400; c.width = w * d; c.height = h * d;
+    const g = c.getContext("2d"); g.scale(d, d);
+    const bg = g.createLinearGradient(0, 0, w, h);
+    bg.addColorStop(0, tok("--crypt")); bg.addColorStop(1, tok("--void"));
+    g.fillStyle = bg; g.fillRect(0, 0, w, h);
+    if (c.dataset.cover === "empire") {
+      // skyline of towers
+      const sun = g.createRadialGradient(w * .7, h * .55, 10, w * .7, h * .55, 260);
+      sun.addColorStop(0, "rgba(246,160,77,.55)"); sun.addColorStop(1, "rgba(246,160,77,0)");
+      g.fillStyle = sun; g.fillRect(0, 0, w, h);
+      let x = 0, seed = 7;
+      const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+      while (x < w) {
+        const tw = 24 + rnd() * 50, th = 60 + rnd() * 180;
+        g.fillStyle = tok("--void"); g.fillRect(x, h - th, tw, th);
+        for (let k = 0; k < tw - 6; k += 10) g.fillRect(x + k, h - th - 8, 6, 8);
+        x += tw + 4;
+      }
+    } else {
+      // grid / network
+      g.strokeStyle = "rgba(255,46,139,.18)"; g.lineWidth = 1;
+      for (let i = 0; i < w; i += 32) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i, h); g.stroke(); }
+      for (let j = 0; j < h; j += 32) { g.beginPath(); g.moveTo(0, j); g.lineTo(w, j); g.stroke(); }
+      const pts = Array.from({ length: 14 }, (_, i) => [60 + ((i * 97) % 520), 50 + ((i * 61) % 300)]);
+      g.strokeStyle = "rgba(246,160,77,.6)";
+      pts.forEach((p, i) => { const q = pts[(i * 5 + 3) % pts.length]; g.beginPath(); g.moveTo(...p); g.lineTo(...q); g.stroke(); });
+      pts.forEach(([px, py]) => { g.fillStyle = tok("--wyrm"); g.shadowColor = tok("--wyrm"); g.shadowBlur = 12; g.beginPath(); g.arc(px, py, 3, 0, 6.283); g.fill(); });
+      g.shadowBlur = 0;
+    }
+    const vg = g.createLinearGradient(0, h * .4, 0, h);
+    vg.addColorStop(0, "rgba(8,7,11,0)"); vg.addColorStop(1, "rgba(8,7,11,.85)");
+    g.fillStyle = vg; g.fillRect(0, 0, w, h);
+  });
+
+  /* ---------- split helpers ---------- */
+  const splitChars = el => {
+    const walk = node => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          [...n.textContent].forEach(ch => {
+            const s = document.createElement("span"); s.className = "ch"; s.textContent = ch; frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else walk(n);
+      });
+    };
+    walk(el);
+    // gradient text needs the clip on each char
+    el.querySelectorAll(".grad-text .ch").forEach(c => c.classList.add("grad-text"));
+    return el.querySelectorAll(".ch");
+  };
+  const man = document.getElementById("manifesto");
+  const words = [];
+  [...man.childNodes].forEach(n => {
+    const hot = n.nodeType === 1;
+    const text = n.textContent;
+    const frag = document.createDocumentFragment();
+    text.split(/(\s+)/).forEach(part => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+      const s = document.createElement("span"); s.className = "w" + (hot ? " hot" : ""); s.textContent = part;
+      words.push(s); frag.appendChild(s);
+    });
+    n.replaceWith(frag);
+  });
+
+  if (reduce) { words.forEach(w => w.classList.add("lit")); return; }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- hero intro ---------- */
+  const lines = [...document.querySelectorAll("#hero-title [data-split]")].map(splitChars);
+  const intro = gsap.timeline({ defaults: { ease: "expo.out" } });
+  lines.forEach((chars, i) => intro.from(chars, { yPercent: 110, rotate: 6, duration: 1.4, stagger: .03 }, i * .15));
+  intro.from(".hero .eyebrow", { opacity: 0, x: -20, duration: .9 }, .1)
+       .from(".hero .lede, .hero .cta-row", { opacity: 0, y: 24, duration: .9, stagger: .08 }, .5)
+       .from("#emblem", { opacity: 0, scale: .92, filter: "blur(12px)", duration: 1.6, clearProps: "filter" }, .2);
+
+  /* emblem parallax */
+  gsap.to("#emblem img", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  /* ---------- magnetic buttons ---------- */
+  if (finePointer) document.querySelectorAll(".magnetic").forEach(el => {
+    const xTo = gsap.quickTo(el, "x", { duration: .6, ease: "power3.out" });
+    const yTo = gsap.quickTo(el, "y", { duration: .6, ease: "power3.out" });
+    el.addEventListener("mousemove", e => {
+      const r = el.getBoundingClientRect();
+      xTo((e.clientX - r.left - r.width / 2) * .3); yTo((e.clientY - r.top - r.height / 2) * .4);
+    });
+    el.addEventListener("mouseleave", () => { xTo(0); yTo(0); });
+  });
+
+  /* ---------- tilt cards ---------- */
+  if (finePointer) document.querySelectorAll(".tilt").forEach(card => {
+    const rx = gsap.quickTo(card, "rotationX", { duration: .8, ease: "power3.out" });
+    const ry = gsap.quickTo(card, "rotationY", { duration: .8, ease: "power3.out" });
+    card.addEventListener("mousemove", e => {
+      const r = card.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      ry((px - .5) * 8); rx((.5 - py) * 8);
+      card.style.setProperty("--px", px * 100 + "%"); card.style.setProperty("--py", py * 100 + "%");
+    });
+    card.addEventListener("mouseleave", () => { rx(0); ry(0); });
+  });
+
+  /* ---------- manifesto scrub ---------- */
+  ScrollTrigger.create({
+    trigger: man, start: "top 80%", end: "bottom 40%", scrub: true,
+    onUpdate: self => { const n = Math.round(self.progress * words.length); words.forEach((w, i) => w.classList.toggle("lit", i < n)); }
+  });
+
+  /* ---------- dragon path draw ---------- */
+  const path = document.getElementById("coil");
+  const len = path.getTotalLength();
+  gsap.set(path, { strokeDasharray: len, strokeDashoffset: len * .6 });
+  ScrollTrigger.create({
+    trigger: "#motion", start: "top 70%", end: "bottom 60%", scrub: .4,
+    onUpdate: s => gsap.set(path, { strokeDashoffset: len * .6 * (1 - s.progress) })
+  });
+})();
+</script>
+<!--MB-BODY-END-->
+</body>
+</html>
