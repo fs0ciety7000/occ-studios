@@ -138,7 +138,8 @@ Règle : le dégradé est **rare** (CTA principal, un mot-clé par section, halo
 - [x] **Étape 3** : site développé (Header, Hero, Studio, Projets ×3, Footer, 404, SEO). `npm run check` et `npm run build` passent. Pas de débordement horizontal à 400 px ni à 1440 px.
 - [x] **Étape 4** : prompts Midjourney dans `docs/midjourney-prompts.md`.
 - [x] **Étape 5** : `Dockerfile` + `Caddyfile` + `.dockerignore`. ⚠️ Pas de démon Docker dans l'environnement : image non testée localement.
-- [ ] ⏸️ Retour utilisateur sur le site, puis premier déploiement Coolify.
+- [x] **Déployé** le 08/10/2026 sur Coolify (accord de l'utilisateur) : application « OCC MONS Studios », uuid `9xhi3ncrkkffgq1q2a5f8ued`, projet Main Stack / production, serveur `localhost`, branche `ccr-f282907a-41jd8i`, Dockerfile, port 80, healthcheck `/healthz`. Premier déploiement `finished`, conteneur `running:healthy`. API : `$COOLIFY_API_URL` + `$COOLIFY_API_TOKEN`.
+- [ ] ⏸️ Retour utilisateur sur le site en ligne.
 
 ## 6. Todo
 
@@ -146,4 +147,4 @@ Règle : le dégradé est **rare** (CTA principal, un mot-clé par section, halo
 - [ ] Remplacer la couverture de CSM (capture claire floutée) par l'image Midjourney n° 1.
 - [ ] Intégrer les autres images Midjourney si l'utilisateur les génère (fond du hero, textures, disciplines).
 - [ ] E-mail de contact : à renseigner dans `site.ts` si l'utilisateur le souhaite.
-- [ ] Après le déploiement : audit Lighthouse sur studios.fs0ciety.org et vérification de l'aperçu Open Graph.
+- [ ] Vérifier le site depuis un navigateur (le proxy de la session cloud bloque studios.fs0ciety.org) ; audit Lighthouse sur studios.fs0ciety.org et vérification de l'aperçu Open Graph.
