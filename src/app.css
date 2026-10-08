@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/cinzel';
+@import '@fontsource-variable/hanken-grotesk';
+@import '@fontsource-variable/jetbrains-mono';
+
+/* ------------------------------------------------------------------
+   OCC MONS Studios — Design System v1 (validé, cf. claude.md §4)
+   ------------------------------------------------------------------ */
+@theme {
+	--color-void: #08070b;
+	--color-crypt: #110e15;
+	--color-stone: #1c1821;
+	--color-seam: #2e2733;
+	--color-bone: #efe8e1;
+	--color-ash: #9d94a3;
+	--color-ember: #f6a04d;
+	--color-blaze: #ff6a3d;
+	--color-wyrm: #ff2e8b;
+
+	--font-display: 'Cinzel Variable', 'Cinzel', 'Trajan Pro', 'Times New Roman', serif;
+	--font-sans: 'Hanken Grotesk Variable', 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+	--font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+	--text-hero: clamp(3.2rem, 11vw, 10rem);
+	--text-display: clamp(2.2rem, 5.2vw, 4.6rem);
+
+	--radius-xs: 2px;
+	--ease-forge: cubic-bezier(0.16, 1, 0.3, 1);
+	--container-site: 1320px;
+}
+
+@layer base {
+	:root {
+		color-scheme: dark;
+		--forge: linear-gradient(
+			120deg,
+			var(--color-ember) 0%,
+			var(--color-blaze) 45%,
+			var(--color-wyrm) 100%
+		);
+		--gutter: clamp(16px, 4vw, 48px);
+	}
+	html {
+		background: var(--color-void);
+		-webkit-text-size-adjust: 100%;
+	}
+	html.lenis,
+	html.lenis body {
+		height: auto;
+	}
+	.lenis.lenis-smooth {
+		scroll-behavior: auto !important;
+	}
+	body {
+		@apply bg-void font-sans text-bone antialiased;
+		line-height: 1.6;
+		overflow-x: clip;
+	}
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+	::selection {
+		background: var(--color-wyrm);
+		color: var(--color-void);
+	}
+	:focus-visible {
+		outline: 2px solid var(--color-ember);
+		outline-offset: 3px;
+	}
+	img {
+		max-width: 100%;
+	}
+}
+
+@layer components {
+	.wrap {
+		@apply mx-auto w-full max-w-site;
+		padding-inline: var(--gutter);
+	}
+	.label {
+		@apply font-mono text-[0.72rem] tracking-[0.18em] text-ash uppercase;
+	}
+	.text-forge {
+		background: var(--forge);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	.bg-forge {
+		background: var(--forge);
+	}
+	/* Grain overlay shared by the whole site */
+	.grain {
+		pointer-events: none;
+		position: fixed;
+		inset: 0;
+		z-index: 60;
+		opacity: 0.055;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	}
+	.link-rune {
+		@apply font-mono text-[0.78rem] tracking-[0.18em] text-bone uppercase no-underline;
+		padding-bottom: 6px;
+		background:
+			linear-gradient(var(--color-seam), var(--color-seam)) 0 100% / 100% 1px no-repeat,
+			var(--forge) 0 100% / 0% 1px no-repeat;
+		transition: background-size 0.6s var(--ease-forge);
+	}
+	.link-rune:hover,
+	.group:hover .link-rune {
+		background-size:
+			100% 1px,
+			100% 1px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

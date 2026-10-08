@@ -22,47 +22,59 @@
 | Type de site | Site vitrine (one-page + pages projets éventuelles) |
 | Vibe | Sombre, moderne, premium, très performant, animations fluides |
 | Inspirations | Santa Monica Studio (sms.playstation.com), CD Projekt Red (cdprojektred.com) |
-| Projets initiaux | `empire.fs0ciety.org`, `test-csm.fs0ciety.org` (système extensible) |
+| Projets | Cosmic Empires (`empire.fs0ciety.org`), Tandem (`tandem-agenda.app`), CSM (`test-csm.fs0ciety.org`) — extensible via `projects.ts` |
+| Contact | Pas de réseaux sociaux. E-mail : non fourni (`site.email = null`, bloc masqué) |
 | Déploiement | Coolify → `studios.fs0ciety.org` |
 
 ### Identité de marque (logos fournis, dans `brand/`)
 
-- `logo-emblem-coil.png` — tour + dragon enroulé, trait fin, dégradé ambre → magenta. **Candidat emblème principal.**
-- `logo-emblem-crest.png` — dragon perché sur une tour crénelée, trait fin. **Candidat favicon / mark compact.**
-- `logo-wordmark.png` — dragon + tour en aplats + texte « OCC MONS ». Plus chargé ; candidat pour usages « affiche ».
-- Motif commun : **une tour (beffroi) et un dragon** — écho au Beffroi de Mons et au Doudou (combat de saint Georges et du dragon). À confirmer avec l'utilisateur avant d'en faire un axe narratif.
+- Emblème principal (validé) : `logo-emblem-coil.png` (tour enlacée) → `static/brand/emblem-*.{avif,webp}` (fond rendu transparent).
+- Mark compact / favicon (validé) : `logo-emblem-crest.png` → `static/brand/mark.webp`, `static/favicon.png`, `static/apple-touch-icon.png`.
+- `logo-wordmark.png` : son lettrage « OCC MONS » est réutilisé dans `static/og-image.jpg`.
+- Récit validé : Mons, le Beffroi et le Doudou (tour + dragon). Coordonnées 50.4542° N · 3.9523° E.
 
-## 3. Choix architecturaux (proposés — en attente de validation)
+### Sources des projets (dépôts GitHub de l'utilisateur)
+- Cosmic Empires = `fs0ciety7000/ogame-like` (visuels repris de `public/assets` et `public/bible/shots`). Éviter le terme « OGame » (marque).
+- Tandem = `fs0ciety7000/agenda` (visuels de `assets/site` et `docs/screenshots/android`).
+- CSM = `fs0ciety7000/baco-svelte`. **Confidentiel** : ne jamais citer l'employeur (opérateur ferroviaire belge), ni ses logos, ni des noms de personnes, de gares ou de codes internes. Présentation générique « outil d'exploitation ferroviaire ». Capture actuelle = tableau de bord fourni par l'utilisateur, zones nominatives floutées.
+- Demandes envoyées le 08/10 aux sessions de ces projets : captures + `showcase/README.md` à pousser sur une branche `occ-studios-showcase` de chaque dépôt. À récupérer quand disponibles.
+
+## 3. Choix architecturaux (validés)
 
 ### Stack
 
 | Couche | Choix | Pourquoi |
 |---|---|---|
-| Framework | **SvelteKit 2 + Svelte 5 (runes)**, TypeScript | Runtime minuscule (pas de VDOM), compile en JS natif, idéal pour un site vitrine ultra-rapide. Next.js est excellent mais embarque React (~45 kB gz) et une infra serveur inutile ici. |
-| Rendu | `@sveltejs/adapter-static` (prerender intégral) | HTML pur servi par un serveur statique : TTFB minimal, 100 % cacheable, aucune surface serveur. |
-| Styles | **Tailwind CSS v4** (`@tailwindcss/vite`) + tokens via `@theme` | Design tokens = variables CSS natives, zéro config JS, purge automatique. |
-| Animations | **GSAP 3.13+** : core, `ScrollTrigger`, `SplitText` (gratuits depuis la 3.13) | Imposé. Timelines d'intro, reveals au scroll, effets de survol magnétiques. |
-| Smooth scroll | **Lenis** synchronisé sur le ticker GSAP | Défilement « inertiel » des sites AAA, compatible ScrollTrigger. |
-| Polices | `@fontsource` (auto-hébergées, subset latin, `font-display: swap`) | Pas de requête tierce, pas de FOIT. |
-| Images | `@sveltejs/enhanced-img` | AVIF/WebP + `srcset` générés au build. |
-| Qualité | ESLint, Prettier, `svelte-check` | Code propre et typé. |
-| Déploiement | Dockerfile multi-stage : build Node 22 → **Caddy** (ou nginx) alpine | Image légère (~50 Mo), gzip/zstd, cache immutable sur `/_app/immutable`. Coolify détecte le Dockerfile. |
+| Framework | **SvelteKit 3 + Svelte 5 (runes)**, TypeScript | Runtime minuscule, idéal pour un site vitrine. |
+| Config | Dans `vite.config.ts` via `sveltekit({...})` | SvelteKit 3 ne lit plus `svelte.config.js`. |
+| Alias | `#lib/...` (subpath imports de `package.json`), extension `.ts` explicite pour les modules TS | `$lib` est supprimé dans Kit 3. |
+| Rendu | `@sveltejs/adapter-static` (prerender intégral, `precompress`, fallback `404.html`) | HTML pur, 100 % cacheable. |
+| Styles | **Tailwind CSS v4** + tokens `@theme` dans `src/app.css` | |
+| Animations | **GSAP 3.15** : `ScrollTrigger`, `SplitText` ; **Lenis** synchronisé sur le ticker GSAP | |
+| Polices | `@fontsource-variable` (Cinzel, Hanken Grotesk, JetBrains Mono) | Auto-hébergées. |
+| Images | Pré-converties en AVIF + WebP (script Python/PIL), composant `Picture.svelte` | Pas de dépendance `sharp`. |
+| Qualité | Prettier, `svelte-check` | |
+| Déploiement | Dockerfile multi-stage Node 22 → **Caddy 2** alpine, port 80, `/healthz` | Coolify (Traefik) gère le TLS. |
 
-### Structure cible (étape 3)
+### Structure (en place)
 
 ```
 src/
+  app.css                      # design tokens Tailwind v4
   lib/
-    data/projects.ts        # source unique des projets (ajout = 1 objet)
-    gsap/                   # setup GSAP + Lenis, actions Svelte (use:reveal, use:magnetic, use:tilt)
-    components/
-      layout/  Header, Footer
-      sections/ Hero, Studio, Projects
-      ui/      Button, ProjectCard, SectionLabel, EmberField
-  routes/
-    +layout.svelte  +page.svelte
-    projets/[slug]/+page.svelte   # optionnel, prérendu depuis projects.ts
-static/  brand/, favicon, og-image
+    data/projects.ts           # source unique des projets
+    data/site.ts               # nom, URL, coordonnées, e-mail (null = masqué)
+    motion/gsap.ts             # registre GSAP + helpers reduced-motion / pointer
+    motion/smooth-scroll.ts    # Lenis
+    motion/actions.ts          # use:reveal, splitReveal, parallax, magnetic, tilt, wipe
+    components/layout/         # Header, Footer, Seo
+    components/sections/       # Hero, Studio, Projects, ProjectFeature
+    components/ui/             # Button, Picture, Status, SectionHead, EmberField
+  routes/ +layout(.ts|.svelte), +page.svelte, +error.svelte, sitemap.xml/+server.ts
+static/ brand/, projects/<slug>/, favicon, og-image.jpg, robots.txt
+moodboard/                     # planche v0.1 (référence, hors build)
+docs/midjourney-prompts.md     # étape 4
+Dockerfile, Caddyfile          # étape 5
 ```
 
 ### Système de projets extensible
@@ -121,30 +133,17 @@ Règle : le dégradé est **rare** (CTA principal, un mot-clé par section, halo
 
 ## 5. Statut
 
-- [x] **Étape 1** — `claude.md` créé.
-- [x] **Étape 2** — Stack proposée, Design System v0.1, planche `moodboard/index.html` générée.
-- [ ] ⏸️ **PAUSE** — En attente de la validation de la planche (couleurs, typos, boutons, animations, choix du logo).
-- [ ] Étape 3 — Développement des pages.
-- [ ] Étape 4 — Prompts Midjourney pour les assets manquants.
-- [ ] Étape 5 — Dockerfile / config Coolify pour `studios.fs0ciety.org`.
+- [x] **Étape 1** : `claude.md`.
+- [x] **Étape 2** : stack et design system **validés par l'utilisateur** (planche https://claude.ai/artifact/LP8EwUYpAqRiEWMfT3BmtW).
+- [x] **Étape 3** : site développé (Header, Hero, Studio, Projets ×3, Footer, 404, SEO). `npm run check` et `npm run build` passent. Pas de débordement horizontal à 400 px ni à 1440 px.
+- [x] **Étape 4** : prompts Midjourney dans `docs/midjourney-prompts.md`.
+- [x] **Étape 5** : `Dockerfile` + `Caddyfile` + `.dockerignore`. ⚠️ Pas de démon Docker dans l'environnement : image non testée localement.
+- [ ] ⏸️ Retour utilisateur sur le site, puis premier déploiement Coolify.
 
 ## 6. Todo
 
-### Questions ouvertes pour l'utilisateur
-- [ ] Valider la stack (SvelteKit + Tailwind v4 + GSAP + Lenis, statique + Caddy).
-- [ ] Valider la palette et les typos (ou ajustements).
-- [ ] Choisir l'emblème principal et le mark compact.
-- [ ] Confirmer le lien Mons / Beffroi / Doudou comme fil narratif.
-- [ ] Fournir descriptions, stack et visuels des projets empire / test-csm (sinon placeholders + prompts Midjourney).
-- [ ] Contact : adresse e-mail, réseaux sociaux à afficher dans le footer.
-
-### Étape 3 (après validation)
-- [ ] Init SvelteKit + Tailwind v4 + tokens `@theme`.
-- [ ] Setup GSAP (ScrollTrigger, SplitText) + Lenis, actions Svelte réutilisables.
-- [ ] Header (nav, état au scroll), Hero (intro motion), Studio, Projets (slider/cartes), Footer.
-- [ ] `projects.ts` + génération des cartes.
-- [ ] SEO : meta, Open Graph, sitemap, robots.
-
-### Étape 5
-- [ ] Dockerfile multi-stage + Caddyfile (headers de cache, compression).
-- [ ] Notes Coolify (port, domaine, healthcheck).
+- [ ] Récupérer les branches `occ-studios-showcase` (ogame-like, agenda, baco-svelte) et remplacer ou compléter les visuels et textes.
+- [ ] Remplacer la couverture de CSM (capture claire floutée) par l'image Midjourney n° 1.
+- [ ] Intégrer les autres images Midjourney si l'utilisateur les génère (fond du hero, textures, disciplines).
+- [ ] E-mail de contact : à renseigner dans `site.ts` si l'utilisateur le souhaite.
+- [ ] Après le déploiement : audit Lighthouse sur studios.fs0ciety.org et vérification de l'aperçu Open Graph.
