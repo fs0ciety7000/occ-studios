@@ -139,6 +139,7 @@ Règle : le dégradé est **rare** (CTA principal, un mot-clé par section, halo
 - [x] **Étape 4** : prompts Midjourney dans `docs/midjourney-prompts.md`.
 - [x] **Étape 5** : `Dockerfile` + `Caddyfile` + `.dockerignore`. ⚠️ Pas de démon Docker dans l'environnement : image non testée localement.
 - [x] **Déployé** le 08/10/2026 sur Coolify (accord de l'utilisateur) : application « OCC MONS Studios », uuid `9xhi3ncrkkffgq1q2a5f8ued`, projet Main Stack / production, serveur `localhost`, branche `ccr-f282907a-41jd8i`, Dockerfile, port 80, healthcheck `/healthz`. Premier déploiement `finished`, conteneur `running:healthy`. API : `$COOLIFY_API_URL` + `$COOLIFY_API_TOKEN`.
+- Redéploiement : le déploiement automatique au push n'est pas fiable (il s'est déclenché une fois sur deux). Après chaque push, lancer `curl -X POST -H "Authorization: Bearer $COOLIFY_API_TOKEN" -H 'Content-Type: application/json' $COOLIFY_API_URL/api/v1/deploy --data '{"uuid":"9xhi3ncrkkffgq1q2a5f8ued"}'`, puis suivre `/api/v1/deployments/applications/<uuid>?take=1`.
 - [ ] ⏸️ Retour utilisateur sur le site en ligne.
 
 ## 6. Todo
