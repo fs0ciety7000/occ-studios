@@ -86,12 +86,13 @@
 			use:reveal={{ stagger: 0.12 }}
 		>
 			{#each project.gallery as shot (shot.src)}
-				<li>
+				{@const device = shot.device ?? (project.galleryKind === 'phone' ? 'phone' : 'desktop')}
+				<li class={device}>
 					<figure>
 						<div class="shot">
 							<Picture
 								image={shot}
-								sizes={project.galleryKind === 'phone' ? '240px' : '(min-width: 1024px) 30vw, 90vw'}
+								sizes={device === 'phone' ? '240px' : '(min-width: 1024px) 30vw, 90vw'}
 								class="h-full w-full object-cover object-top"
 							/>
 						</div>
@@ -213,6 +214,19 @@
 		justify-content: center;
 		gap: clamp(12px, 3vw, 40px);
 	}
+	/* Desktop shots span two columns, phones one, bottoms aligned. */
+	.gallery.mixed {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		align-items: end;
+	}
+	.gallery.mixed li.desktop {
+		grid-column: span 2;
+	}
+	@media (min-width: 768px) {
+		.gallery.mixed {
+			grid-template-columns: repeat(6, minmax(0, 1fr));
+		}
+	}
 	.shot {
 		overflow: hidden;
 		border: 1px solid var(--color-seam);
@@ -223,13 +237,13 @@
 		aspect-ratio: 16 / 10;
 	}
 	.phone .shot {
-		aspect-ratio: 1 / 2;
+		aspect-ratio: 430 / 930;
 		border-radius: 18px;
 		border-width: 4px;
 		border-color: var(--color-stone);
 		box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--color-wyrm) 30%, transparent);
 	}
-	.phone li:nth-child(2) {
+	.gallery.phone li:nth-child(2) {
 		transform: translateY(-24px);
 	}
 	.shot :global(img) {

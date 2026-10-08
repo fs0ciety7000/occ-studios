@@ -143,7 +143,8 @@ Règle : le dégradé est **rare** (CTA principal, un mot-clé par section, halo
 
 ## 6. Todo
 
-- [ ] Récupérer les branches `occ-studios-showcase` (ogame-like, agenda, baco-svelte) et remplacer ou compléter les visuels et textes.
+- [x] Tandem : branche `occ-studios-showcase` d'`agenda` intégrée (texte, 2 captures desktop + 2 mobiles, foyer de démo « Emma et Tom »). Les anciennes captures avec de vrais prénoms ont été retirées.
+- [ ] Récupérer `occ-studios-showcase` d'`ogame-like` et de `baco-svelte` quand elles seront poussées.
 - [x] Images Midjourney intégrées (08/10) : couverture CSM (`static/projects/csm/cover`, la capture floutée passe en galerie), fond du hero (`static/brand/hero-bg`), texture Studio (`static/textures/forge`), disciplines (`static/disciplines/{games,web}`), bloc Prochain monde (`static/brand/next-world`).
 - [ ] E-mail de contact : à renseigner dans `site.ts` si l'utilisateur le souhaite.
 - [ ] Vérifier le site depuis un navigateur (le proxy de la session cloud bloque studios.fs0ciety.org) ; audit Lighthouse sur studios.fs0ciety.org et vérification de l'aperçu Open Graph.

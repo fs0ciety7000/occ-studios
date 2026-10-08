@@ -14,6 +14,8 @@ export type ProjectImage = {
 	alt: string;
 	/** Caption shown in the gallery. */
 	caption?: string;
+	/** Device frame used in mixed galleries. */
+	device?: 'desktop' | 'phone';
 };
 
 export type ProjectStatus = 'live' | 'beta' | 'dev';
@@ -36,7 +38,7 @@ export type Project = {
 	cover: ProjectImage;
 	gallery: ProjectImage[];
 	/** Gallery layout: landscape screenshots or phone screens. */
-	galleryKind: 'desktop' | 'phone';
+	galleryKind: 'desktop' | 'phone' | 'mixed';
 };
 
 export const statusLabel: Record<ProjectStatus, string> = {
@@ -52,8 +54,17 @@ const img = (
 	width: number,
 	height: number,
 	alt: string,
-	caption?: string
-): ProjectImage => ({ src: `/projects/${slug}/${name}`, widths, width, height, alt, caption });
+	caption?: string,
+	device?: ProjectImage['device']
+): ProjectImage => ({
+	src: `/projects/${slug}/${name}`,
+	widths,
+	width,
+	height,
+	alt,
+	caption,
+	device
+});
 
 export const projects: Project[] = [
 	{
@@ -124,15 +135,16 @@ export const projects: Project[] = [
 		category: 'Application · Web & Android',
 		status: 'live',
 		year: 2026,
-		tagline: "L'équilibre parfait pour votre foyer.",
+		tagline: "L'agenda partagé du foyer, pour s'organiser à deux.",
 		description:
-			'Le gestionnaire des tâches du foyer pour les couples. Tandem répartit les corvées entre deux personnes, gère les répétitions et les tours de rôle, et publie tout dans un calendrier Google partagé. Site web et application Android native, utilisables hors ligne et synchronisés en temps réel.',
+			"Tandem organise le quotidien d'un foyer à deux : tâches, tours de rôle, courses, repas, dépenses et calendrier. On ouvre l'app, on voit ce qu'il y a à faire aujourd'hui, on coche. Tout se synchronise en direct entre le web et Android, fonctionne hors ligne et se connecte à Google Agenda. Disponible en français, en anglais et en néerlandais.",
 		features: [
 			'Ajout rapide en langage naturel',
-			'Répétitions et tours de rôle',
-			'Liste de courses partagée, rangée par rayon',
-			'Hors ligne et synchronisé en temps réel',
-			'Widgets Android et notifications'
+			'Répétitions et tours de rôle qui alternent seuls',
+			'Courses et menus partagés, rangés par rayon',
+			'Dépenses communes, soldes et budget du mois',
+			'Calendrier synchronisé avec Google Agenda',
+			'Hors ligne, temps réel, widgets Android'
 		],
 		stack: ['Next.js', 'NestJS', 'PostgreSQL', 'Redis', 'Kotlin', 'Jetpack Compose'],
 		cta: 'Découvrir Tandem',
@@ -145,34 +157,47 @@ export const projects: Project[] = [
 			1000,
 			"Page d'accueil de Tandem avec l'application ouverte sur un téléphone"
 		),
-		galleryKind: 'phone',
+		galleryKind: 'mixed',
 		gallery: [
 			img(
 				'tandem',
-				'phone-today',
-				[480],
-				480,
-				960,
-				"Écran Aujourd'hui de Tandem sur Android",
-				"Aujourd'hui"
+				'shot-accueil',
+				[720, 1440],
+				1440,
+				900,
+				"Écran Aujourd'hui de Tandem sur ordinateur, avec un foyer de démonstration",
+				"Aujourd'hui",
+				'desktop'
 			),
 			img(
 				'tandem',
-				'phone-calendar',
-				[480],
-				480,
-				960,
-				'Calendrier mensuel de Tandem',
-				'Calendrier'
+				'shot-calendrier',
+				[720, 1440],
+				1440,
+				900,
+				'Calendrier de Tandem en vue semaine',
+				'Calendrier · semaine',
+				'desktop'
 			),
 			img(
 				'tandem',
-				'phone-dark',
-				[480],
-				480,
-				960,
-				'Tandem en mode sombre, hors ligne',
-				'Mode sombre, hors ligne'
+				'phone-accueil',
+				[430],
+				430,
+				930,
+				"Écran Aujourd'hui de Tandem sur téléphone",
+				'Mobile',
+				'phone'
+			),
+			img(
+				'tandem',
+				'phone-notes',
+				[430],
+				430,
+				930,
+				'Notes partagées dans Tandem sur téléphone',
+				'Notes partagées',
+				'phone'
 			)
 		]
 	},
