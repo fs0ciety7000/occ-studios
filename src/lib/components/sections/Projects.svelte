@@ -21,11 +21,27 @@
 		{/each}
 
 		<div class="next" use:reveal>
-			<span class="label">Prochain monde</span>
+			<picture class="next-bg" aria-hidden="true">
+				<source
+					type="image/avif"
+					srcset="/brand/next-world-960.avif 960w, /brand/next-world-1680.avif 1680w"
+					sizes="100vw"
+				/>
+				<img
+					src="/brand/next-world-1680.webp"
+					srcset="/brand/next-world-960.webp 960w, /brand/next-world-1680.webp 1680w"
+					sizes="100vw"
+					alt=""
+					width="1680"
+					height="720"
+					loading="lazy"
+				/>
+			</picture>
+			<span class="label text-bone">Prochain monde</span>
 			<p class="font-display text-[clamp(1.8rem,4vw,3.2rem)] leading-tight font-bold">
 				Déjà <span class="text-forge">en forge</span>.
 			</p>
-			<p class="max-w-[52ch] text-ash">
+			<p class="max-w-[52ch] text-bone/80">
 				De nouveaux projets rejoindront bientôt cette galerie. Chaque monde publié par le studio est
 				présenté ici dès sa mise en ligne.
 			</p>
@@ -35,13 +51,45 @@
 
 <style>
 	.next {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		min-height: clamp(320px, 38vw, 520px);
+		justify-content: center;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: 18px;
 		padding: clamp(48px, 8vw, 96px) 24px;
 		text-align: center;
-		border: 1px dashed var(--color-seam);
+		border: 1px solid var(--color-seam);
 		border-radius: var(--radius-xs);
+	}
+	.next-bg {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+	}
+	.next-bg img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 2s var(--ease-forge);
+	}
+	.next:hover .next-bg img {
+		transform: scale(1.04);
+	}
+	.next-bg::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(
+			ellipse at center,
+			color-mix(in srgb, var(--color-void) 72%, transparent),
+			color-mix(in srgb, var(--color-void) 35%, transparent)
+		);
+	}
+	.next p {
+		text-shadow: 0 2px 24px var(--color-void);
 	}
 </style>

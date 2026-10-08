@@ -198,13 +198,23 @@ export const projects: Project[] = [
 		cta: 'Accès sur invitation',
 		cover: img(
 			'csm',
-			'shot-dashboard',
-			[720, 1440],
-			1440,
-			900,
-			'Tableau de bord de CSM : commandes du jour, raccourcis et commandes à confirmer (données floutées)'
+			'cover',
+			[800, 1376],
+			1376,
+			860,
+			'Illustration : salle de contrôle ferroviaire de nuit, écrans de schémas de voies face aux quais sous la pluie'
 		),
 		galleryKind: 'desktop',
-		gallery: []
+		gallery: [
+			img(
+				'csm',
+				'shot-dashboard',
+				[720, 1440],
+				1440,
+				900,
+				'Tableau de bord de CSM : commandes du jour, raccourcis et commandes à confirmer (données floutées)',
+				'Tableau de bord (données floutées)'
+			)
+		]
 	}
 ];

@@ -204,6 +204,10 @@
 	.gallery.desktop {
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
 	}
+	/* A lone screenshot stays thumbnail-sized instead of spanning the whole row. */
+	.gallery.desktop:has(> li:only-child) {
+		grid-template-columns: minmax(0, 420px);
+	}
 	.gallery.phone {
 		grid-template-columns: repeat(3, minmax(0, 220px));
 		justify-content: center;

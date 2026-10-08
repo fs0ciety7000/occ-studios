@@ -144,7 +144,6 @@ Règle : le dégradé est **rare** (CTA principal, un mot-clé par section, halo
 ## 6. Todo
 
 - [ ] Récupérer les branches `occ-studios-showcase` (ogame-like, agenda, baco-svelte) et remplacer ou compléter les visuels et textes.
-- [ ] Remplacer la couverture de CSM (capture claire floutée) par l'image Midjourney n° 1.
-- [ ] Intégrer les autres images Midjourney si l'utilisateur les génère (fond du hero, textures, disciplines).
+- [x] Images Midjourney intégrées (08/10) : couverture CSM (`static/projects/csm/cover`, la capture floutée passe en galerie), fond du hero (`static/brand/hero-bg`), texture Studio (`static/textures/forge`), disciplines (`static/disciplines/{games,web}`), bloc Prochain monde (`static/brand/next-world`).
 - [ ] E-mail de contact : à renseigner dans `site.ts` si l'utilisateur le souhaite.
 - [ ] Vérifier le site depuis un navigateur (le proxy de la session cloud bloque studios.fs0ciety.org) ; audit Lighthouse sur studios.fs0ciety.org et vérification de l'aperçu Open Graph.

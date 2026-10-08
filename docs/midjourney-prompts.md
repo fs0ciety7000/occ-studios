@@ -3,6 +3,8 @@
 Palette de référence pour toutes les images : noir violacé `#08070B`, ambre `#F6A04D`, orange feu `#FF6A3D`, magenta `#FF2E8B`.
 Export : PNG, puis déposer dans `static/` (je m'occupe de la conversion AVIF/WebP).
 
+**Statut : les 6 images ont été générées et intégrées au site le 08/10/2026.**
+
 ## 1. Couverture CSM (prioritaire)
 Remplace la capture claire et floutée actuelle, qui jure avec le site sombre.
 Destination : `static/projects/csm/cover` · format 16:10.

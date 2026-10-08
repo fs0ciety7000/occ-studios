@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Picture from '#lib/components/ui/Picture.svelte';
 	import SectionHead from '#lib/components/ui/SectionHead.svelte';
 	import { reveal, tilt } from '#lib/motion/actions.ts';
 	import { gsap, prefersReducedMotion, setupGsap } from '#lib/motion/gsap.ts';
@@ -20,13 +21,17 @@
 			label: 'Discipline I',
 			title: 'Jeux vidéo',
 			text: "Jeux de stratégie persistants, jouables directement dans le navigateur. Nous concevons l'économie, l'équilibrage, le multijoueur en temps réel et la direction artistique.",
-			tags: ['Game design', 'Temps réel', 'Équilibrage', 'Direction artistique']
+			tags: ['Game design', 'Temps réel', 'Équilibrage', 'Direction artistique'],
+			image: 'games',
+			alt: 'Table de guerre sombre : tours sculptées et dragon de bronze sur une carte lumineuse'
 		},
 		{
 			label: 'Discipline II',
 			title: 'Web & applications',
 			text: 'Sites vitrines, applications métier et applications mobiles. Rapides, accessibles et simples à faire évoluer, du prototype à la production.',
-			tags: ['SvelteKit', 'Next.js', 'Android natif', 'Accessibilité']
+			tags: ['SvelteKit', 'Next.js', 'Android natif', 'Accessibilité'],
+			image: 'web',
+			alt: 'Métal en fusion coulé dans une forge, avec des lignes de code en hologramme'
 		}
 	];
 
@@ -88,10 +93,10 @@
 
 <section
 	id="studio"
-	class="relative border-t border-seam py-28 md:py-40"
+	class="studio relative border-t border-seam py-28 md:py-40"
 	aria-labelledby="studio-title"
 >
-	<div class="wrap flex flex-col gap-24 md:gap-36">
+	<div class="wrap relative flex flex-col gap-24 md:gap-36">
 		<SectionHead label="01 — Le studio" title="Forgé à l'ombre du beffroi" id="studio-title">
 			OCC MONS Studios est né à Mons. Notre emblème réunit la tour et le dragon du Doudou : la
 			ténacité de celui qui bâtit et le feu de celui qui crée. Nous réunissons deux métiers sous le
@@ -105,6 +110,19 @@
 		<div id="expertise" class="grid gap-6 md:grid-cols-2" use:reveal={{ stagger: 0.12 }}>
 			{#each disciplines as d (d.title)}
 				<article class="discipline group" use:tilt={{ max: 4 }}>
+					<div class="media">
+						<Picture
+							image={{
+								src: `/disciplines/${d.image}`,
+								widths: [640, 1232],
+								width: 1232,
+								height: 770,
+								alt: d.alt
+							}}
+							sizes="(min-width: 768px) 45vw, 100vw"
+							class="h-full w-full object-cover"
+						/>
+					</div>
 					<span class="label">{d.label}</span>
 					<h3 class="font-display text-[clamp(1.9rem,3.4vw,2.8rem)] leading-tight font-bold">
 						{d.title}
@@ -168,15 +186,29 @@
 		background-clip: text;
 		color: transparent;
 	}
+	/* Forged-stone texture, kept faint and faded at both ends of the section. */
+	.studio::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		opacity: 0.14;
+		background: image-set(
+				url('/textures/forge-1344.avif') type('image/avif'),
+				url('/textures/forge-1344.webp') type('image/webp')
+			)
+			center / 900px auto repeat;
+		mask-image: linear-gradient(180deg, transparent, #000 20%, #000 70%, transparent);
+	}
 	.discipline {
 		--px: 50%;
 		--py: 50%;
+		--pad: clamp(28px, 4vw, 48px);
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 18px;
-		min-height: 360px;
-		padding: clamp(28px, 4vw, 48px);
+		padding: var(--pad);
 		background: var(--color-crypt);
 		border: 1px solid var(--color-seam);
 		border-radius: var(--radius-xs);
@@ -195,6 +227,25 @@
 			color-mix(in srgb, var(--color-ember) 14%, transparent),
 			transparent 60%
 		);
+	}
+	.media {
+		position: relative;
+		margin: calc(-1 * var(--pad)) calc(-1 * var(--pad)) 8px;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		border-bottom: 1px solid var(--color-seam);
+	}
+	.media::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, transparent 45%, var(--color-crypt));
+	}
+	.media :global(img) {
+		transition: transform 1.4s var(--ease-forge);
+	}
+	.discipline:hover .media :global(img) {
+		transform: scale(1.05);
 	}
 	.discipline:hover {
 		border-color: color-mix(in srgb, var(--color-ember) 40%, var(--color-seam));

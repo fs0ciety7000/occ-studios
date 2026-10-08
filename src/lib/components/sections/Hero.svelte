@@ -43,6 +43,11 @@
 				);
 			});
 			intro
+				.from(
+					'[data-hero="bg"]',
+					{ autoAlpha: 0, scale: 1.08, duration: 2.4, ease: 'power2.out' },
+					0
+				)
 				.from('[data-hero="eyebrow"]', { autoAlpha: 0, x: -24, duration: 1 }, 0.1)
 				.from('[data-hero="fade"]', { autoAlpha: 0, y: 28, duration: 1, stagger: 0.1 }, 0.65)
 				.from(
@@ -55,6 +60,12 @@
 			document.fonts.ready.then(() => intro.play());
 
 			// Scroll-out: emblem drifts, copy recedes.
+			gsap.to('[data-hero="bg"] img', {
+				yPercent: 8,
+				scale: 1.06,
+				ease: 'none',
+				scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: true }
+			});
 			gsap.to('[data-hero="emblem-img"]', {
 				yPercent: 14,
 				ease: 'none',
@@ -80,6 +91,22 @@
 	class="hero relative flex min-h-svh flex-col overflow-hidden"
 	aria-labelledby="hero-title"
 >
+	<picture class="hero-bg" data-hero="bg" aria-hidden="true">
+		<source
+			type="image/avif"
+			srcset="/brand/hero-bg-960.avif 960w, /brand/hero-bg-1456.avif 1456w"
+			sizes="100vw"
+		/>
+		<img
+			src="/brand/hero-bg-1456.webp"
+			srcset="/brand/hero-bg-960.webp 960w, /brand/hero-bg-1456.webp 1456w"
+			sizes="100vw"
+			alt=""
+			width="1456"
+			height="816"
+			fetchpriority="high"
+		/>
+	</picture>
 	<EmberField />
 	<div class="halo" aria-hidden="true"></div>
 
@@ -168,6 +195,37 @@
 		letter-spacing: 0.62em;
 		color: var(--color-ash);
 		overflow: hidden;
+	}
+	/* Belfry key art: anchored right, faded into the void on the copy side. */
+	.hero-bg {
+		position: absolute;
+		inset: 0 0 0 auto;
+		width: min(100%, 1500px);
+	}
+	@media (min-width: 1024px) {
+		.hero-bg {
+			width: min(78%, 1500px);
+		}
+	}
+	.hero-bg {
+		pointer-events: none;
+		opacity: 0.75;
+		mask-image:
+			linear-gradient(90deg, transparent 0%, #000 40%),
+			linear-gradient(0deg, transparent 0%, #000 25%);
+		mask-composite: intersect;
+	}
+	.hero-bg img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 30%;
+	}
+	@media (max-width: 1023px) {
+		.hero-bg {
+			opacity: 0.45;
+			mask-image: linear-gradient(0deg, transparent 0%, #000 35%);
+		}
 	}
 	.halo {
 		position: absolute;
