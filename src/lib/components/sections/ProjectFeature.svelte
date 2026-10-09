@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Picture from '#lib/components/ui/Picture.svelte';
 	import Status from '#lib/components/ui/Status.svelte';
+	import { openLightbox } from '#lib/components/ui/lightbox.svelte.ts';
 	import type { Project } from '#lib/data/projects.ts';
 	import { parallax, reveal, splitReveal, tilt, wipe } from '#lib/motion/actions.ts';
 
@@ -9,6 +10,7 @@
 
 	const roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 	const flip = $derived(index % 2 === 1);
+	const thumbs: (HTMLElement | null)[] = $state([]);
 	const domain = $derived(project.url.replace(/^https?:\/\//, ''));
 </script>
 
@@ -90,17 +92,24 @@
 			aria-label="Captures de {project.title}"
 			use:reveal={{ stagger: 0.12 }}
 		>
-			{#each project.gallery as shot (shot.src)}
+			{#each project.gallery as shot, i (shot.src)}
 				{@const device = shot.device ?? (project.galleryKind === 'phone' ? 'phone' : 'desktop')}
 				<li class={device}>
 					<figure>
-						<div class="shot">
+						<button
+							type="button"
+							class="shot"
+							bind:this={thumbs[i]}
+							onclick={() => openLightbox(project.gallery, i, project.title, thumbs)}
+							aria-label="Agrandir : {shot.caption ?? shot.alt}"
+						>
 							<Picture
 								image={shot}
 								sizes={device === 'phone' ? '240px' : '(min-width: 1024px) 30vw, 90vw'}
 								class="h-full w-full object-cover object-top"
 							/>
-						</div>
+							<span class="zoom" aria-hidden="true">⤢</span>
+						</button>
 						{#if shot.caption}<figcaption class="label mt-3">{shot.caption}</figcaption>{/if}
 					</figure>
 				</li>
@@ -234,6 +243,11 @@
 		}
 	}
 	.shot {
+		position: relative;
+		display: block;
+		width: 100%;
+		padding: 0;
+		cursor: zoom-in;
 		overflow: hidden;
 		border: 1px solid var(--color-seam);
 		border-radius: var(--radius-xs);
@@ -251,6 +265,34 @@
 	}
 	.gallery.phone li:nth-child(2) {
 		transform: translateY(-24px);
+	}
+	.zoom {
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+		display: grid;
+		place-items: center;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background: color-mix(in srgb, var(--color-void) 75%, transparent);
+		color: var(--color-bone);
+		opacity: 0;
+		transform: scale(0.8);
+		transition:
+			opacity 0.3s,
+			transform 0.4s var(--ease-forge);
+	}
+	.shot:hover .zoom,
+	.shot:focus-visible .zoom {
+		opacity: 1;
+		transform: none;
+	}
+	@media (pointer: coarse) {
+		.zoom {
+			opacity: 1;
+			transform: none;
+		}
 	}
 	.shot :global(img) {
 		transition: transform 1.2s var(--ease-forge);

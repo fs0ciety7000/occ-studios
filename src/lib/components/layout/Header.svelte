@@ -27,7 +27,9 @@
 			aria-label="{site.name}, accueil"
 		>
 			<img src="/brand/mark.webp" alt="" width="40" height="40" class="size-10" />
-			<span class="font-display text-[1.05rem] font-bold tracking-[0.12em] whitespace-nowrap max-[420px]:sr-only">
+			<span
+				class="font-display text-[1.05rem] font-bold tracking-[0.12em] whitespace-nowrap max-[420px]:sr-only"
+			>
 				OCC <span class="text-forge">MONS</span>
 			</span>
 		</a>

@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import Footer from '#lib/components/layout/Footer.svelte';
 	import Header from '#lib/components/layout/Header.svelte';
+	import Lightbox from '#lib/components/ui/Lightbox.svelte';
 	import { setupGsap, ScrollTrigger } from '#lib/motion/gsap.ts';
 	import { initSmoothScroll } from '#lib/motion/smooth-scroll.ts';
 
@@ -23,6 +24,7 @@
 	{@render children()}
 </main>
 <Footer />
+<Lightbox />
 <div class="grain" aria-hidden="true"></div>
 
 <style>

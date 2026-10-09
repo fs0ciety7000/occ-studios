@@ -27,3 +27,12 @@ export function scrollToTarget(target: string | HTMLElement) {
 		el?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 	}
 }
+
+/** Freezes page scrolling (e.g. while a modal is open). */
+export function lockScroll(locked: boolean) {
+	if (lenis) {
+		if (locked) lenis.stop();
+		else lenis.start();
+	}
+	document.documentElement.style.overflow = locked ? 'hidden' : '';
+}

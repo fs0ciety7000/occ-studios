@@ -71,7 +71,7 @@ src/
     motion/actions.ts          # use:reveal, splitReveal, parallax, magnetic, tilt, wipe
     components/layout/         # Header, Footer, Seo
     components/sections/       # Hero, Studio, Projects, ProjectIndex (liste rapide + filtres Flip), ProjectFeature (showcase)
-    components/ui/             # Button, Picture, Status, SectionHead, EmberField
+    components/ui/             # Button, Picture, Status, SectionHead, EmberField, Lightbox (+ lightbox.svelte.ts : état partagé)
   routes/ +layout(.ts|.svelte), +page.svelte, +error.svelte, sitemap.xml/+server.ts
 static/ brand/, projects/<slug>/, favicon, og-image.jpg, robots.txt
 moodboard/                     # planche v0.1 (référence, hors build)
@@ -145,6 +145,8 @@ Règle : le dégradé est **rare** (CTA principal, un mot-clé par section, halo
 - [ ] ⏸️ Retour utilisateur sur le site en ligne.
 
 ## 6. Todo
+
+- [x] Lightbox des captures du showcase (09/10) : `<dialog>` modal monté dans le layout. L'image s'agrandit depuis la miniature et y revient à la fermeture (GSAP). Flèches clavier, boutons, swipe, Échap ; le scroll de la page (Lenis) est bloqué pendant l'ouverture.
 
 - [x] Index des projets (09/10) : liste compacte en tête de la section Projets (`#index`, lien « Index » dans le header). Une ligne par projet avec lien direct vers le site et lien « Fiche » vers le showcase (`#projet-<slug>`). Filtres Tous / Jeux / Web & apps animés avec GSAP Flip, aperçu de la couverture qui suit le curseur (desktop). Le showcase est conservé en dessous.
 
