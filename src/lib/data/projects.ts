@@ -128,6 +128,38 @@ export const projects: Project[] = [
 		]
 	},
 	{
+		slug: 'tape-taupe',
+		title: 'Tape Taupe',
+		url: 'https://taupe.fs0ciety.org',
+		kind: 'game',
+		category: 'Jeu · Arcade rétro',
+		status: 'live',
+		year: 2026,
+		tagline: "Le tape-taupe d'arcade en pixel art, à jouer le temps d'une pause.",
+		description:
+			"Un jeu d'arcade rétro en 8 bits, jouable sur mobile comme sur ordinateur. Les taupes sortent de neuf trous de plus en plus vite : il faut les taper avant qu'elles ne replongent, éviter les bombes et tenir face aux boss. Les parties sont courtes, on rejoue en un geste et on compare son score au classement.",
+		features: [
+			'Quatre modes : Arcade, Défi du jour, Rush et Vengeance, plus un duel',
+			'Combos, taupe dorée, bombes et bonus',
+			'Trois boss, dont un boss final au niveau 12',
+			'Classements par mode et par période, avec anti-triche',
+			'Album de cartes, vestiaire, trophées et événements saisonniers',
+			'Musique 8 bits synthétisée, carte de score à partager, PWA'
+		],
+		stack: ['Svelte 5', 'TypeScript', 'Vite', 'Bun', 'Hono', 'SQLite'],
+		cta: 'Jouer à Tape Taupe',
+		cover: img(
+			'tape-taupe',
+			'cover',
+			[800, 1536],
+			1536,
+			960,
+			'Illustration : trois taupes en bonnet tricoté sortent de leurs trous sous un maillet, en pixel art'
+		),
+		galleryKind: 'desktop',
+		gallery: []
+	},
+	{
 		slug: 'tandem',
 		title: 'Tandem',
 		url: 'https://tandem-agenda.app',
@@ -197,6 +229,69 @@ export const projects: Project[] = [
 				930,
 				'Notes partagées dans Tandem sur téléphone',
 				'Notes partagées',
+				'phone'
+			)
+		]
+	},
+	{
+		slug: 'occ-deliveries',
+		title: 'OCC Deliveries',
+		url: 'https://eat.fs0ciety.org',
+		kind: 'web',
+		category: 'Application · Commandes groupées',
+		status: 'live',
+		year: 2026,
+		tagline: "Qu'est-ce qu'on mange ? On vote, on commande, on se rembourse.",
+		description:
+			"L'outil des commandes de repas groupées au bureau. Un hôte ouvre une commande, l'équipe la rejoint avec un code, vote pour le restaurant puis chacun compose son panier. La commande part vers la plateforme de livraison et chacun rembourse le payeur en un scan.",
+		features: [
+			'Commande partagée, rejointe par code ou QR',
+			'Vote en temps réel pour choisir le restaurant',
+			'Paniers individuels avec options de menu',
+			'Envoi vers les plateformes de livraison, ou export',
+			'Remboursement par QR SEPA, Wero ou Bancontact',
+			'Restaurants géolocalisés, menus synchronisés chaque nuit'
+		],
+		stack: ['React 19', 'Vite', 'Tailwind', 'TanStack Query', 'PocketBase', 'Go'],
+		cta: 'Lancer une commande',
+		cover: img(
+			'occ-deliveries',
+			'cover',
+			[800, 1536],
+			1536,
+			960,
+			'Illustration : sacs de livraison, boîtes à pizza et bols sur un bureau de nuit, un téléphone affiche un vote'
+		),
+		galleryKind: 'mixed',
+		gallery: [
+			img(
+				'occ-deliveries',
+				'shot-accueil',
+				[720, 1440],
+				1440,
+				900,
+				"Page d'accueil d'OCC Deliveries : lancer ou rejoindre une commande",
+				'Accueil',
+				'desktop'
+			),
+			img(
+				'occ-deliveries',
+				'shot-restos',
+				[720, 1440],
+				1440,
+				900,
+				'Liste des restaurants à proximité avec filtres par cuisine',
+				'Restaurants',
+				'desktop'
+			),
+			img(
+				'occ-deliveries',
+				'phone-accueil',
+				[430],
+				430,
+				930,
+				"Page d'accueil d'OCC Deliveries sur téléphone",
+				'Mobile',
 				'phone'
 			)
 		]

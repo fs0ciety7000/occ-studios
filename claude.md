@@ -22,7 +22,7 @@
 | Type de site | Site vitrine (one-page + pages projets éventuelles) |
 | Vibe | Sombre, moderne, premium, très performant, animations fluides |
 | Inspirations | Santa Monica Studio (sms.playstation.com), CD Projekt Red (cdprojektred.com) |
-| Projets | Cosmic Empires (`empire.fs0ciety.org`), Tandem (`tandem-agenda.app`), CSM (`test-csm.fs0ciety.org`) — extensible via `projects.ts` |
+| Projets | Cosmic Empires (`empire.fs0ciety.org`), Tape Taupe (`taupe.fs0ciety.org`), Tandem (`tandem-agenda.app`), OCC Deliveries (`eat.fs0ciety.org`), CSM (`test-csm.fs0ciety.org`) — extensible via `projects.ts` |
 | Contact | Pas de réseaux sociaux. E-mail : non fourni (`site.email = null`, bloc masqué) |
 | Déploiement | Coolify → `studios.fs0ciety.org` |
 
@@ -37,6 +37,8 @@
 - Cosmic Empires = `fs0ciety7000/ogame-like` (visuels repris de `public/assets` et `public/bible/shots`). Éviter le terme « OGame » (marque).
 - Tandem = `fs0ciety7000/agenda` (visuels de `assets/site` et `docs/screenshots/android`).
 - CSM = `fs0ciety7000/baco-svelte`. **Confidentiel** : ne jamais citer l'employeur (opérateur ferroviaire belge), ni ses logos, ni des noms de personnes, de gares ou de codes internes. Présentation générique « outil d'exploitation ferroviaire ». Capture actuelle = tableau de bord fourni par l'utilisateur, zones nominatives floutées.
+- Tape Taupe = `fs0ciety7000/taupe` (privé). **Confidentiel** : les taupes portent de vrais visages de collègues, avec leurs prénoms et surnoms. On ne montre jamais l'écran de jeu, l'Album, le Vestiaire ni `og.png`. Couverture = illustration générée (OpenAI gpt-image-1), sans visage. Pas de galerie tant qu'un pack de taupes fictives n'existe pas.
+- OCC Deliveries = `fs0ciety7000/OCC-DELIVERIES`. Couverture générée. Galerie = mes captures du site en ligne (accueil, restaurants, mobile). Les captures de `docs/screenshots` contiennent des prénoms de démo : leur réutilisation a été bloquée par la règle sur les données personnelles, donc ne pas les réutiliser sans accord explicite.
 - Demandes envoyées le 08/10 aux sessions de ces projets : captures + `showcase/README.md` à pousser sur une branche `occ-studios-showcase` de chaque dépôt. À récupérer quand disponibles.
 
 ## 3. Choix architecturaux (validés)

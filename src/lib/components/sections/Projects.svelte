@@ -12,8 +12,8 @@
 >
 	<div class="wrap flex flex-col gap-28 md:gap-44">
 		<SectionHead label="02 — Projets" title="Les mondes que nous avons forgés" id="projets-title">
-			Un jeu de stratégie spatiale, une application pour le foyer, un outil d'exploitation
-			ferroviaire. Trois projets en ligne, conçus et développés par le studio.
+			Des jeux pour le navigateur, des applications pour le quotidien et des outils métier. Chaque
+			projet est conçu, développé et mis en ligne par le studio.
 		</SectionHead>
 
 		{#each projects as project, i (project.slug)}
