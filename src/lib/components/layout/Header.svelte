@@ -27,11 +27,11 @@
 			aria-label="{site.name}, accueil"
 		>
 			<img src="/brand/mark.webp" alt="" width="40" height="40" class="size-10" />
-			<span class="font-display text-[1.05rem] font-bold tracking-[0.12em]">
+			<span class="font-display text-[1.05rem] font-bold tracking-[0.12em] whitespace-nowrap max-[420px]:sr-only">
 				OCC <span class="text-forge">MONS</span>
 			</span>
 		</a>
-		<nav aria-label="Navigation principale" class="flex items-center gap-6 sm:gap-10">
+		<nav aria-label="Navigation principale" class="flex items-center gap-4 sm:gap-10">
 			{#each nav as item (item.href)}
 				<a href={item.href} class="label nav-link">{item.label}</a>
 			{/each}

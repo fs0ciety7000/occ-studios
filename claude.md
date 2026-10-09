@@ -70,7 +70,7 @@ src/
     motion/smooth-scroll.ts    # Lenis
     motion/actions.ts          # use:reveal, splitReveal, parallax, magnetic, tilt, wipe
     components/layout/         # Header, Footer, Seo
-    components/sections/       # Hero, Studio, Projects, ProjectFeature
+    components/sections/       # Hero, Studio, Projects, ProjectIndex (liste rapide + filtres Flip), ProjectFeature (showcase)
     components/ui/             # Button, Picture, Status, SectionHead, EmberField
   routes/ +layout(.ts|.svelte), +page.svelte, +error.svelte, sitemap.xml/+server.ts
 static/ brand/, projects/<slug>/, favicon, og-image.jpg, robots.txt
@@ -145,6 +145,8 @@ Règle : le dégradé est **rare** (CTA principal, un mot-clé par section, halo
 - [ ] ⏸️ Retour utilisateur sur le site en ligne.
 
 ## 6. Todo
+
+- [x] Index des projets (09/10) : liste compacte en tête de la section Projets (`#index`, lien « Index » dans le header). Une ligne par projet avec lien direct vers le site et lien « Fiche » vers le showcase (`#projet-<slug>`). Filtres Tous / Jeux / Web & apps animés avec GSAP Flip, aperçu de la couverture qui suit le curseur (desktop). Le showcase est conservé en dessous.
 
 - [x] Tandem : branche `occ-studios-showcase` d'`agenda` intégrée (texte, 2 captures desktop + 2 mobiles, foyer de démo « Emma et Tom »). Les anciennes captures avec de vrais prénoms ont été retirées.
 - [ ] Récupérer `occ-studios-showcase` d'`ogame-like` et de `baco-svelte` quand elles seront poussées.

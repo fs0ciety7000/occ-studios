@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ProjectFeature from './ProjectFeature.svelte';
+	import ProjectIndex from './ProjectIndex.svelte';
 	import SectionHead from '#lib/components/ui/SectionHead.svelte';
 	import { projects } from '#lib/data/projects.ts';
 	import { reveal } from '#lib/motion/actions.ts';
@@ -15,6 +16,13 @@
 			Des jeux pour le navigateur, des applications pour le quotidien et des outils métier. Chaque
 			projet est conçu, développé et mis en ligne par le studio.
 		</SectionHead>
+
+		<ProjectIndex />
+
+		<div class="flex items-center gap-4" aria-hidden="true">
+			<span class="label">Showcase</span>
+			<span class="h-px flex-1 bg-seam"></span>
+		</div>
 
 		{#each projects as project, i (project.slug)}
 			<ProjectFeature {project} index={i} total={projects.length} />

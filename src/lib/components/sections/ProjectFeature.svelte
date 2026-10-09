@@ -12,7 +12,12 @@
 	const domain = $derived(project.url.replace(/^https?:\/\//, ''));
 </script>
 
-<article class="feature" class:flip aria-labelledby="project-{project.slug}">
+<article
+	id="projet-{project.slug}"
+	class="feature"
+	class:flip
+	aria-labelledby="project-{project.slug}"
+>
 	<a
 		href={project.url}
 		target="_blank"
@@ -106,6 +111,7 @@
 
 <style>
 	.feature {
+		scroll-margin-top: 96px;
 		display: grid;
 		grid-template-columns: minmax(0, 1fr);
 		gap: clamp(32px, 5vw, 72px);
