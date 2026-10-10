@@ -16,6 +16,8 @@ export type ProjectImage = {
 	caption?: string;
 	/** Device frame used in mixed galleries. */
 	device?: 'desktop' | 'phone';
+	/** CSS object-position used when the image is cropped (e.g. '85% 50%'). */
+	focus?: string;
 };
 
 export type ProjectStatus = 'live' | 'beta' | 'dev';
@@ -124,6 +126,78 @@ export const projects: Project[] = [
 				900,
 				'Écran des bâtiments de Cosmic Empires',
 				'Bâtiments'
+			)
+		]
+	},
+	{
+		slug: 'privatix',
+		title: 'Privatix',
+		url: 'https://privatix.fs0ciety.org',
+		kind: 'game',
+		category: "Jeu · Hack 'n' slash roguelite",
+		status: 'live',
+		year: 2026,
+		tagline: "Le rail n'est pas à vendre.",
+		description:
+			"Un hack 'n' slash roguelite satirique en 3D, gratuit, jouable dans le navigateur et sur Windows, macOS et Linux. Un cheminot en 3x8, armé de la clé à tire-fond de son grand-père, remonte la gare de Mons face à une armée de consultants venus privatiser le rail. Chaque tentative est un Shift ; à chaque chute, les collègues le ramènent à l'OCC, l'« Operation Coffee Center ».",
+		features: [
+			'Combat nerveux et lisible : combos, dash, coup de sifflet',
+			'Burnout : le héros devient plus fort et plus fragile',
+			'Butin visible directement sur le héros',
+			'Boss et élites en plusieurs phases',
+			'Rendu 3D toon « Néon & Ballast »',
+			'Navigateur, Windows, macOS et Linux'
+		],
+		stack: ['Three.js', 'TypeScript', 'Vite', 'Electron'],
+		cta: 'Jouer à Privatix',
+		cover: {
+			...img(
+				'privatix',
+				'cover',
+				[800, 1600],
+				1600,
+				1000,
+				"Bannière de Privatix : un cheminot armé d'une clé à tire-fond repousse des consultants sur un quai de gare au crépuscule"
+			),
+			focus: '85% 50%'
+		},
+		galleryKind: 'desktop',
+		gallery: [
+			img(
+				'privatix',
+				'shot-1',
+				[720, 1440],
+				1440,
+				810,
+				'Privatix : le héros face à une borne automatique sur le quai',
+				'Quais & Voies'
+			),
+			img(
+				'privatix',
+				'shot-2',
+				[720, 1440],
+				1440,
+				810,
+				'Privatix : combat contre le Discosaure sur une piste de danse lumineuse',
+				'Le Discosaure'
+			),
+			img(
+				'privatix',
+				'shot-3',
+				[720, 1440],
+				1440,
+				810,
+				'Privatix : salve de projectiles télégraphiés sur le quai de Mons',
+				'Attaques télégraphiées'
+			),
+			img(
+				'privatix',
+				'shot-4',
+				[720, 1440],
+				1440,
+				810,
+				"Privatix : l'OCC, salle de repos des collègues entre deux Shifts",
+				"L'OCC"
 			)
 		]
 	},

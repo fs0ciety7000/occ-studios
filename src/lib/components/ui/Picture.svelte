@@ -33,5 +33,6 @@
 		{fetchpriority}
 		decoding="async"
 		class={klass}
+		style:object-position={image.focus}
 	/>
 </picture>
